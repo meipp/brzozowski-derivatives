@@ -63,7 +63,8 @@ simplify (Or p Phi) = simplify p
 simplify (Or p q) = Or (simplify p) (simplify q)
 
 fullSimplify :: Regex -> Regex
-fullSimplify p = fst $ head $ dropWhile (uncurry (/=)) $ zip (iterate simplify p) (tail (iterate simplify p))
+fullSimplify p = if p == p' then p else fullSimplify p'
+  where p' = simplify p
 
 depth :: Regex -> Integer
 depth Phi = 0
