@@ -38,6 +38,13 @@ deriveSequence (a:as) p = deriveSequence as (deriveSymbol a p)
 match :: Regex -> [Char] -> Bool
 match p as = delta (deriveSequence as p) == Lambda
 
+deriveSequence' :: [Char] -> Regex -> Regex
+deriveSequence' [] p = p
+deriveSequence' (a:as) p = deriveSequence' as (fullSimplify (deriveSymbol a p))
+
+match' :: Regex -> [Char] -> Bool
+match' p as = delta (deriveSequence' as p) == Lambda
+
 normalForm :: [Char] -> Regex -> Regex
 -- TODO deep
 normalForm alphabet p = foldl Or (delta p) (map (\a -> Concatenation (Symbol a) (deriveSymbol a p)) alphabet)
