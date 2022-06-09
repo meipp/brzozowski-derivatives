@@ -85,3 +85,6 @@ length' (Iterate p) = length' p + 1
 length' (Not p) = length' p + 1
 length' (And p q) = length' p + length' q + 1
 length' (Or p q) = length' p + length' q + 1
+
+i :: Regex
+i = Not Phi
