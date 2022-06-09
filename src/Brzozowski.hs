@@ -60,6 +60,8 @@ simplify (And _ Phi) = Phi
 simplify (And p q) = And (simplify p) (simplify q)
 simplify (Or Phi p) = simplify p
 simplify (Or p Phi) = simplify p
+simplify (Or (Not Phi) p) = Not Phi
+simplify (Or p (Not Phi)) = Not Phi
 simplify (Or p q) = Or (simplify p) (simplify q)
 
 fullSimplify :: Regex -> Regex
