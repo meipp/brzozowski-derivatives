@@ -85,18 +85,3 @@ length' (Iterate p) = length' p + 1
 length' (Not p) = length' p + 1
 length' (And p q) = length' p + length' q + 1
 length' (Or p q) = length' p + length' q + 1
-
-r1 :: Regex
-r1 = Symbol '1' `Concatenation` (Symbol '1' `Concatenation` Symbol '1')
-
-i :: Regex
-i = Not Phi
-
-left :: Regex
-left = i `Concatenation` Symbol '1' `Concatenation` Symbol '1' `Concatenation` Symbol '1' `Concatenation` i
-
-right :: Regex
-right = Not (Or (i `Concatenation` Symbol '0' `Concatenation` Symbol '1') (Symbol '1' `Concatenation` Iterate (Symbol '1')))
-
-testRegex :: Regex
-testRegex = And left right
