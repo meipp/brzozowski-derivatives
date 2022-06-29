@@ -10,7 +10,7 @@ regex = do
 
 atom :: Parser Regex
 atom = do
-    r <- symbol <|> universalSet <|> parentheses regex
+    r <- universalSet <|> symbol <|> parentheses regex
     (return (Not r) <* char '\'') <|> (return (Iterate r) <* char '*') <|> return r
 
 concatenation :: Parser Regex
